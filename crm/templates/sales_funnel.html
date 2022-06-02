@@ -1,0 +1,291 @@
+{% extends 'base.html' %}
+{% load static from static %}
+
+{% block content %}
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+                {% for item in wait %}
+                    <div class="card border-danger mb-3" style="max-width: 18rem;">
+                        <div class="card-header bg-danger text-white ">{{ item.sales_funnel }} #{{ item.pk }}</div>
+                        <div class="card-body text-dark">
+                            <h5 class="card-title">{{ item.sur_name }} {{ item.last_name }}</h5>
+                            <span class="fw-bold"> Telefon raqami:</span> {{ item.numbers }}
+                            <br>
+                            <span class="fw-bold">Manzil:</span> {{ item.address }}
+                            <br>
+                            <span class="fw-bolder">{{ item.date }}</span>
+                        </div>
+                        <div class="col px-1 py-1 text-center">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#openModal{{ item.pk }}">
+                                O'zgartirish
+                            </button>
+
+                            <div class="modal fade" id="openModal{{ item.pk }}" tabindex="-1"
+                                 aria-labelledby="openModal{{ item.pk }}Label"
+                                 aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content col-2">
+                                        <form action="{% url 'crm:update_lead_url' item.pk %}" method="get" novalidate
+                                              class="input-group">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col text-start">
+                                                        <p>{{ item.form.numbers }}</p>
+                                                        {{ form.as_p }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                    Close
+                                                </button>
+                                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col">
+                {% for item in call %}
+                    <div class="card border-danger mb-3" style="max-width: 18rem;">
+                        <div class="card-header bg-danger text-white ">{{ item.sales_funnel }} #{{ item.pk }}</div>
+                        <div class="card-body text-dark">
+                            <h5 class="card-title">{{ item.sur_name }} {{ item.last_name }}</h5>
+                            <span class="fw-bold"> Telefon raqami:</span> {{ item.numbers }}
+                            <br>
+                            <span class="fw-bold">Manzil:</span> {{ item.address }}
+                            <br>
+                            <span class="fw-bolder">{{ item.date }}</span>
+                        </div>
+                        <div class="col px-1 py-1 text-center">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#openModal{{ item.pk }}">
+                                O'zgartirish
+                            </button>
+
+                            <div class="modal fade" id="openModal{{ item.pk }}" tabindex="-1"
+                                 aria-labelledby="openModal{{ item.pk }}Label"
+                                 aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content col-2">
+                                        <form action="{% url 'crm:update_lead_url' item.pk %}" method="get" novalidate
+                                              class="input-group">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col text-start">
+                                                        <p>{{ item.form.numbers }}</p>
+                                                        {{ form.as_p }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                    Close
+                                                </button>
+                                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col">
+                {% for item in meeting %}
+                    <div class="card border-danger mb-3" style="max-width: 18rem;">
+                        <div class="card-header bg-danger text-white ">{{ item.sales_funnel }} #{{ item.pk }}</div>
+                        <div class="card-body text-dark">
+                            <h5 class="card-title">{{ item.sur_name }} {{ item.last_name }}</h5>
+                            <span class="fw-bold"> Telefon raqami:</span> {{ item.numbers }}
+                            <br>
+                            <span class="fw-bold">Manzil:</span> {{ item.address }}
+                            <br>
+                            <span class="fw-bolder">{{ item.date }}</span>
+                        </div>
+                        <div class="col px-1 py-1 text-center">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#openModal{{ item.pk }}">
+                                O'zgartirish
+                            </button>
+
+                            <div class="modal fade" id="openModal{{ item.pk }}" tabindex="-1"
+                                 aria-labelledby="openModal{{ item.pk }}Label"
+                                 aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content col-2">
+                                        <form action="{% url 'crm:update_lead_url' item.pk %}" method="get" novalidate
+                                              class="input-group">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col text-start">
+                                                        <p>{{ item.form.numbers }}</p>
+                                                        {{ form.as_p }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                    Close
+                                                </button>
+                                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col">
+                {% for item in treaty %}
+                    <div class="card border-danger mb-3" style="max-width: 18rem;">
+                        <div class="card-header bg-danger text-white ">{{ item.sales_funnel }} #{{ item.pk }}</div>
+                        <div class="card-body text-dark">
+                            <h5 class="card-title">{{ item.sur_name }} {{ item.last_name }}</h5>
+                            <span class="fw-bold"> Telefon raqami:</span> {{ item.numbers }}
+                            <br>
+                            <span class="fw-bold">Manzil:</span> {{ item.address }}
+                            <br>
+                            <span class="fw-bolder">{{ item.date }}</span>
+                        </div>
+                        <div class="col px-1 py-1 text-center">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#openModal{{ item.pk }}">
+                                O'zgartirish
+                            </button>
+
+                            <div class="modal fade" id="openModal{{ item.pk }}" tabindex="-1"
+                                 aria-labelledby="openModal{{ item.pk }}Label"
+                                 aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content col-2">
+                                        <form action="{% url 'crm:update_lead_url' item.pk %}" method="get" novalidate
+                                              class="input-group">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col text-start">
+                                                        <p>{{ item.form.numbers }}</p>
+                                                        {{ form.as_p }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                    Close
+                                                </button>
+                                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col">
+                {% for item in completed %}
+                    <div class="card border-danger mb-3" style="max-width: 18rem;">
+                        <div class="card-header bg-danger text-white ">{{ item.sales_funnel }} #{{ item.pk }}</div>
+                        <div class="card-body text-dark">
+                            <h5 class="card-title">{{ item.sur_name }} {{ item.last_name }}</h5>
+                            <span class="fw-bold"> Telefon raqami:</span> {{ item.numbers }}
+                            <br>
+                            <span class="fw-bold">Manzil:</span> {{ item.address }}
+                            <br>
+                            <span class="fw-bolder">{{ item.date }}</span>
+                        </div>
+                        <div class="col px-1 py-1 text-center">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#openModal{{ item.pk }}">
+                                O'zgartirish
+                            </button>
+
+                            <div class="modal fade" id="openModal{{ item.pk }}" tabindex="-1"
+                                 aria-labelledby="openModal{{ item.pk }}Label"
+                                 aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content col-2">
+                                        <form action="{% url 'crm:update_lead_url' item.pk %}" method="get" novalidate
+                                              class="input-group">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col text-start">
+                                                        <p>{{ item.form.numbers }}</p>
+                                                        {{ form.as_p }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                    Close
+                                                </button>
+                                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col">
+                {% for item in archive %}
+                    <div class="card border-danger mb-3" style="max-width: 18rem;">
+                        <div class="card-header bg-danger text-white ">{{ item.sales_funnel }} #{{ item.pk }}</div>
+                        <div class="card-body text-dark">
+                            <h5 class="card-title">{{ item.sur_name }} {{ item.last_name }}</h5>
+                            <span class="fw-bold"> Telefon raqami:</span> {{ item.numbers }}
+                            <br>
+                            <span class="fw-bold">Manzil:</span> {{ item.address }}
+                            <br>
+                            <span class="fw-bolder">{{ item.date }}</span>
+                        </div>
+                        <div class="col px-1 py-1 text-center">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#openModal{{ item.pk }}">
+                                O'zgartirish
+                            </button>
+
+                            <div class="modal fade" id="openModal{{ item.pk }}" tabindex="-1"
+                                 aria-labelledby="openModal{{ item.pk }}Label"
+                                 aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content col-2">
+                                        <form action="{% url 'crm:update_lead_url' item.pk %}" method="get" novalidate
+                                              class="input-group">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col text-start">
+                                                        <p>{{ item.form.numbers }}</p>
+                                                        {{ form.as_p }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                    Close
+                                                </button>
+                                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

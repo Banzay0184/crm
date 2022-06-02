@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static from static %}
+
+{% block content %}
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-4 py-3">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Mijozni kiritish
+                </button>
+                <a href="{% url 'crm:sales_funnel' %}">
+                    <button type="button" class="btn btn-primary">
+                        Mijozlar xolati
+                    </button>
+                </a>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content col-2">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Mijozning ma'lumotlari</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <form method="post" novalidate class="input-group">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col">
+                                            {% csrf_token %}
+                                            {{ form.as_p }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Orqaga
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">Saqlash</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <table class="table">
+                <h1 class="title py-2">Barcha Mijozlar</h1>
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">F.I.SH</th>
+                    <th scope="col">Tel.raqam</th>
+                    <th scope="col">Xizmat turi</th>
+                    <th scope="col">Xodim</th>
+                    <th scope="col">Qidiruv trafik</th>
+                    <th scope="col">Kiritilgan vaqti</th>
+                    {% for item in leadsupdate %}
+                        <th>{{ item.leads }}</th>
+                    {% endfor %}
+                </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                {% for lead in leads %}
+                    <tr>
+                        <th scope="row">{{ lead.pk }}</th>
+                        <td>{{ lead.sur_name }} {{ lead.last_name }}</td>
+                        <td>+998 {{ lead.numbers }}</td>
+                        <td>{{ lead.service }}</td>
+                        <td>{{ lead.employees }}</td>
+                        <td>{{ lead.search_traffic }}</td>
+                        <td>{{ lead.date }}</td>
+                        <td>
+                            <a href="{% url 'crm:delete_lead' lead.pk %}"><button type="delete" class="btn btn-danger">O'chirish</button></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static from static %}
+
+{% block content %}
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-4 py-3">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Buyurtmani kiritish
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content col-2">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <form method="post">
+                                <div class="container">
+                                    {% csrf_token %}
+                                    {{ form.as_p }}
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Orqaga
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">Saqlash</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <table class="table">
+                <h1 class="title py-2">Barcha Buyurtmalar</h1>
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Loyiha</th>
+                    <th scope="col">F.I.SH</th>
+                    <th scope="col">Tel.raqam</th>
+                    <th scope="col">Bo'limlar</th>
+                    <th scope="col">To'lov xolati</th>
+                    <th scope="col">Tugatilish sanasi</th>
+                    <th scope="col">Manzil</th>
+                    <th scope="col">Telefon raqami</th>
+                    <th scope="col">Buyurtma xolati</th>
+                </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                {% for project in projects %}
+                    <tr>
+                        <th scope="row">{{ project.pk }}</th>
+                        <td>{{ project.name }}</td>
+                        <td>{{ project.name_lead }}</td>
+                        <td>{{ project.numbers }}</td>
+                        <td>{{ project.department }}</td>
+                        <td>{{ project.status_pay }}</td>
+                        <td>{{ project.data_end }}</td>
+                        <td>{{ project.address }}</td>
+                        <td>+998{{ project.numbers }}</td>
+                        <td>
+                            <progress value="{{ project.get_group_status.sum_status }}"
+                                      max="100"></progress>
+                        </td>
+                        <td>
+                            <p>{{ project.get_group_status.sum_status }} %</p>
+                        </td>
+                        <td>
+                            <a href="{% url 'crm:delete_project' project.pk %}"><button type="delete" class="btn btn-danger">O'chirish</button></a>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#openModal{{ project.pk }}">Ishbay
+                            </button>
+                        </td>
+                        <div class="modal fade" id="openModal{{ project.pk }}" tabindex="-1"
+                             aria-labelledby="openModal{{ project.pk }}Label"
+                             aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        {% for item in project.get_group_status.status.all %}
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <progress value="{{ item.status }}" max="100"></progress>
+                                                    {{ item.status }} %
+                                                    <br>
+                                                    <span>{{ item.title }}</span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <form action="{% url 'crm:change_status_url' item.pk %}"
+                                                          method="get" class="input-group-sm">
+                                                        <input type="number" class="form-control " name="status"
+                                                               value="{{ item.status }}">
+                                                        <button class="btn btn-success">Saqlash</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            Orqaga
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
